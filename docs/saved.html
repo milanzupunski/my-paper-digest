@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saved papers</title>
+<style>
+:root{--bg:#fbfaf7;--card:#fff;--ink:#1f2421;--mute:#68716b;--line:#e3e1da;
+--acc:#2f6b4f;--acc2:#e7f0ea;--pre:#8a5a00;--pre2:#fbf1dc;--sel:#fff7d6}
+:root[data-theme=dark]{--bg:#141716;--card:#1c201e;--ink:#e6e8e4;
+--mute:#9aa39d;--line:#2d3330;--acc:#7cc2a0;--acc2:#20302a;--pre:#e0b25c;--pre2:#33291a;--sel:#3a3520}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px}
+.wrap{max-width:980px;margin:0 auto}
+h1{font-size:20px;margin:0 0 4px}
+.meta{color:var(--mute);font-size:13px}
+.meta a{color:var(--acc)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
+input[type=search]{flex:1;min-width:180px;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink)}
+button{padding:7px 11px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer;font-size:13px}
+button.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
+label.chk{font-size:13px;color:var(--mute);display:flex;gap:4px;align-items:center}
+nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+nav a{font-size:12px;text-decoration:none;color:var(--acc);background:var(--acc2);padding:2px 8px;border-radius:10px}
+main{padding:8px 16px 60px}
+h2{font-size:16px;margin:26px 0 8px;padding-bottom:4px;border-bottom:2px solid var(--acc)}
+h2 small{color:var(--mute);font-weight:normal}
+.item{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0;display:flex;gap:10px}
+.item.kept{background:var(--sel)}
+.item input{margin-top:5px;width:17px;height:17px;flex:none}
+.body{flex:1;min-width:0}
+.t{font-weight:600;color:var(--ink);text-decoration:none}
+.t:hover{text-decoration:underline}
+.au{color:var(--mute);font-size:13px}
+.src{font-size:13px;margin-top:2px}
+.badge{display:inline-block;font-size:11px;padding:0 6px;border-radius:8px;background:var(--acc2);color:var(--acc);margin-right:4px}
+.badge.rev{background:var(--line);color:var(--mute)}
+.badge.pre{background:var(--pre2);color:var(--pre)}
+.terms{font-size:12px;color:var(--mute);margin-top:3px}
+details{margin-top:4px;font-size:14px}
+summary{cursor:pointer;color:var(--acc);font-size:13px}
+.score{float:right;font-size:12px;color:var(--mute)}
+.notes{font-size:12px;color:var(--mute);margin-top:6px}
+.hide{display:none}
+.item.more{display:none}
+section.open .item.more{display:flex}
+section.open .item.more.hide{display:none}
+section.open .morebtn{display:none}
+.morebtn{margin:4px 0 0}
+select{padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font-size:13px}
+.btnlike{padding:7px 11px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer;font-size:13px}
+.rm{margin-top:6px;font-size:12px;padding:3px 8px}
+.src a,.meta a{color:var(--acc)}
+</style>
+<script>try{if(localStorage.getItem("plantdigest-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+</head>
+
+<body data-date="saved">
+<header><div class="wrap"><h1>Saved papers</h1>
+<div class="meta"><span id="count">0</span> papers saved in this browser · <a href="index.html">newest digest</a></div>
+<div class="bar"><input id="q" type="search" placeholder="Filter by any word…">
+<select id="sort"><option value="saved">Newest saved first</option><option value="pub">Newest published first</option><option value="title">Title A to Z</option></select>
+<button class="primary" onclick="copyRefs(visible())">Copy all</button>
+<button onclick="risFor(visible(),'saved_papers.ris')">Download as RIS (Zotero)</button>
+<button onclick="backup()">Backup</button>
+<label class="btnlike">Restore<input type="file" id="restore" accept=".json,application/json" hidden></label>
+<button id="themebtn" onclick="toggleTheme()">Dark mode</button><span id="flash" class="meta"></span></div>
+<div class="meta">Saved papers live in this browser only. Use <b>Backup</b> to keep a copy or to move them to another device, then <b>Restore</b> there.</div>
+</div></header>
+<main><div class="wrap"><div id="list"></div><p id="empty" class="meta hide">Nothing saved yet. Tick papers in a digest and they appear here.</p></div></main>
+<script>
+const SKEY='plantdigest-saved';
+function loadSaved(){try{return JSON.parse(localStorage.getItem(SKEY)||'{}')}catch(e){return {}}}
+function storeSaved(o){try{localStorage.setItem(SKEY,JSON.stringify(o));return true}catch(e){alert('Your browser blocked saving. Saved papers cannot be stored in this window (private mode?).');return false}}
+function refLine(r){return `${r.authors} (${(r.date||'').slice(0,4)}) ${r.title}. ${r.journal}. ${r.link}`}
+function copyRefs(list){
+  if(!list.length){alert('Nothing to copy yet.');return}
+  const txt=list.map(refLine).join('\n\n');
+  navigator.clipboard.writeText(txt).then(()=>flash('Copied '+list.length+' references'),()=>{prompt('Copy:',txt)});
+}
+function downloadFile(name,text,type){
+  const blob=new Blob([text],{type:type});const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();
+}
+function risFor(list,name){
+  if(!list.length){alert('Nothing to export yet.');return}
+  const lines=[];
+  list.forEach(r=>{
+    lines.push('TY  - '+(r.preprint?'UNPB':'JOUR'));
+    (r.authors||'').split(/,\s*/).filter(Boolean).forEach(a=>lines.push('AU  - '+a));
+    lines.push('TI  - '+r.title);lines.push('T2  - '+r.journal);
+    if(r.date)lines.push('PY  - '+r.date.slice(0,4));
+    if(r.doi)lines.push('DO  - '+r.doi);
+    lines.push('UR  - '+r.link);
+    if(r.abstract)lines.push('AB  - '+r.abstract);
+    lines.push('ER  - ','');
+  });
+  downloadFile(name,lines.join('\r\n'),'application/x-research-info-systems');
+}
+function flash(m){const b=document.getElementById('flash');if(b){b.textContent=m;setTimeout(()=>b.textContent='',2500)}}
+function setThemeLabel(){const b=document.getElementById("themebtn");if(b)b.textContent=document.documentElement.dataset.theme==="dark"?"Light mode":"Dark mode"}
+function toggleTheme(){const d=document.documentElement;const dark=d.dataset.theme!=="dark";if(dark)d.dataset.theme="dark";else delete d.dataset.theme;try{localStorage.setItem("plantdigest-theme",dark?"dark":"light")}catch(e){}setThemeLabel()}
+setThemeLabel();
+
+
+let saved=loadSaved();
+const esc=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function entries(){
+  const q=document.getElementById('q').value.toLowerCase().trim();
+  let l=Object.entries(saved).map(([id,r])=>Object.assign({id},r));
+  if(q)l=l.filter(r=>(r.title+' '+r.authors+' '+r.journal+' '+(r.abstract||'')).toLowerCase().includes(q));
+  const k=document.getElementById('sort').value;
+  l.sort((a,b)=>k==='title'?a.title.localeCompare(b.title):k==='pub'?(b.date||'').localeCompare(a.date||''):(b.savedOn||'').localeCompare(a.savedOn||''));
+  return l;
+}
+function visible(){return entries()}
+function render(){
+  const l=entries();
+  document.getElementById('count').textContent=Object.keys(saved).length;
+  document.getElementById('empty').classList.toggle('hide',Object.keys(saved).length>0);
+  document.getElementById('list').innerHTML=l.map(r=>`<div class="item kept"><div class="body">
+    <a class="t" href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.title)}</a>
+    <div class="au">${esc(r.authors)}</div>
+    <div class="src">${r.preprint?'<span class="badge pre">preprint</span>':''}${r.review?'<span class="badge rev">review</span>':''}<i>${esc(r.journal)}</i> · ${esc(r.date)} · saved ${esc(r.savedOn)}${r.digest?` from <a href="digest_${esc(r.digest)}.html">${esc(r.digest)} digest</a>`:''}</div>
+    ${r.abstract?`<details><summary>abstract</summary><p>${esc(r.abstract)}</p></details>`:''}
+    <button class="rm" data-id="${esc(r.id)}">Remove</button></div></div>`).join('');
+  document.querySelectorAll('.rm').forEach(b=>b.onclick=()=>{if(confirm('Remove this paper from Saved?')){saved=loadSaved();delete saved[b.dataset.id];storeSaved(saved);render()}});
+}
+function backup(){downloadFile('saved_papers_'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(loadSaved(),null,1),'application/json')}
+document.getElementById('restore').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  f.text().then(t=>{let add;try{add=JSON.parse(t)}catch(err){alert('That file is not a saved-papers backup.');return}
+    saved=loadSaved();let n=0;for(const[k,v]of Object.entries(add)){if(!saved[k]&&v&&v.title){saved[k]=v;n++}}
+    storeSaved(saved);render();flash('Restored '+n+(n===1?' paper':' papers'));});
+});
+['q','sort'].forEach(id=>document.getElementById(id).addEventListener('input',render));
+render();
+</script>
+</body></html>

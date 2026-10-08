@@ -46,6 +46,10 @@ section.open .item.more{display:flex}
 section.open .item.more.hide{display:none}
 section.open .morebtn{display:none}
 .morebtn{margin:4px 0 0}
+select{padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font-size:13px}
+.btnlike{padding:7px 11px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer;font-size:13px}
+.rm{margin-top:6px;font-size:12px;padding:3px 8px}
+.src a,.meta a{color:var(--acc)}
 </style>
 <script>try{if(localStorage.getItem("plantdigest-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 </head>
@@ -53,7 +57,8 @@ section.open .morebtn{display:none}
 <body data-date="2026-10-08">
 <header><div class="wrap"><h1>Plant paper digest</h1>
 <div class="meta">774 papers, window 2026-09-08 to 2026-10-08, generated 2026-10-08 · <a href="archive.html">earlier digests</a></div>
-<div class="bar"><input id="q" type="search" placeholder="Filter by any word…"><label class="chk"><input id="only" type="checkbox">ticked only</label><label class="chk"><input id="nopre" type="checkbox">hide preprints</label><label class="chk"><input id="norev" type="checkbox">hide reviews</label><button class="primary" onclick="copyList()">Copy ticked (<span id="nkept">0</span>)</button><button onclick="ris()">Download ticked as RIS (Zotero)</button><button onclick="clearAll()">Untick all</button><button id="themebtn" onclick="toggleTheme()">Dark mode</button><span id="flash" class="meta"></span></div>
+<div class="meta"><a href="saved.html">Saved papers (<span id="ntotal">0</span>)</a></div>
+<div class="bar"><input id="q" type="search" placeholder="Filter by any word…"><label class="chk">Show <select id="show"><option value="all">all papers</option><option value="saved">saved</option><option value="research">research papers only</option><option value="reviews">reviews only</option><option value="preprints">preprints only</option><option value="nopre">no preprints</option></select></label><button class="primary" onclick="copyList()">Copy saved here (<span id="nkept">0</span>)</button><button onclick="ris()">Download as RIS (Zotero)</button><button id="themebtn" onclick="toggleTheme()">Dark mode</button><span id="flash" class="meta"></span></div>
 <nav>
 <a href="#s0">Ca2+, ROS and early signaling (177)</a>
 <a href="#s1">Kinases and signal transduction (46)</a>
@@ -7051,46 +7056,23 @@ section.open .morebtn{display:none}
 </div></main>
 
 <script>
-const KEY='plantdigest-'+document.body.dataset.date;
-let kept={};
-try{kept=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(kept))}catch(e){}}
-function refreshCount(){document.getElementById('nkept').textContent=Object.keys(kept).length}
-document.querySelectorAll('.item').forEach(el=>{
-  const cb=el.querySelector('input');const id=el.dataset.id;
-  if(kept[id]){cb.checked=true;el.classList.add('kept')}
-  cb.addEventListener('change',()=>{
-    if(cb.checked){kept[id]=1;el.classList.add('kept')}else{delete kept[id];el.classList.remove('kept')}
-    save();refreshCount();applyFilter();
-  });
-});
-refreshCount();
-function applyFilter(){
-  const q=document.getElementById('q').value.toLowerCase().trim();
-  const only=document.getElementById('only').checked;
-  const nopre=document.getElementById('nopre').checked;
-  const norev=document.getElementById('norev').checked;
-  document.querySelectorAll('section').forEach(sec=>{
-    if(q||only)sec.classList.add('open');
-    let n=0;
-    sec.querySelectorAll('.item').forEach(el=>{
-      let ok=(!q||el.textContent.toLowerCase().includes(q))&&(!only||kept[el.dataset.id])&&(!nopre||el.dataset.pre!=='1')&&(!norev||el.dataset.rev!=='1');
-      el.classList.toggle('hide',!ok); if(ok)n++;
-    });
-    sec.classList.toggle('hide',n===0);
-  });
+const SKEY='plantdigest-saved';
+function loadSaved(){try{return JSON.parse(localStorage.getItem(SKEY)||'{}')}catch(e){return {}}}
+function storeSaved(o){try{localStorage.setItem(SKEY,JSON.stringify(o));return true}catch(e){alert('Your browser blocked saving. Saved papers cannot be stored in this window (private mode?).');return false}}
+function refLine(r){return `${r.authors} (${(r.date||'').slice(0,4)}) ${r.title}. ${r.journal}. ${r.link}`}
+function copyRefs(list){
+  if(!list.length){alert('Nothing to copy yet.');return}
+  const txt=list.map(refLine).join('\n\n');
+  navigator.clipboard.writeText(txt).then(()=>flash('Copied '+list.length+' references'),()=>{prompt('Copy:',txt)});
 }
-['q','only','nopre','norev'].forEach(id=>document.getElementById(id).addEventListener('input',applyFilter));
-function selected(){return [...document.querySelectorAll('.item')].filter(el=>kept[el.dataset.id]).map(el=>{const r=JSON.parse(el.dataset.rec);const p=el.querySelector('details p');r.abstract=p?p.textContent:'';return r})}
-function copyList(){
-  const s=selected(); if(!s.length){alert('Nothing ticked yet.');return}
-  const txt=s.map(r=>`${r.authors} (${(r.date||'').slice(0,4)}) ${r.title}. ${r.journal}. ${r.link}`).join('\n\n');
-  navigator.clipboard.writeText(txt).then(()=>flash('Copied '+s.length+' references'),()=>{prompt('Copy:',txt)});
+function downloadFile(name,text,type){
+  const blob=new Blob([text],{type:type});const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();
 }
-function ris(){
-  const s=selected(); if(!s.length){alert('Nothing ticked yet.');return}
+function risFor(list,name){
+  if(!list.length){alert('Nothing to export yet.');return}
   const lines=[];
-  s.forEach(r=>{
+  list.forEach(r=>{
     lines.push('TY  - '+(r.preprint?'UNPB':'JOUR'));
     (r.authors||'').split(/,\s*/).filter(Boolean).forEach(a=>lines.push('AU  - '+a));
     lines.push('TI  - '+r.title);lines.push('T2  - '+r.journal);
@@ -7100,16 +7082,65 @@ function ris(){
     if(r.abstract)lines.push('AB  - '+r.abstract);
     lines.push('ER  - ','');
   });
-  const blob=new Blob([lines.join('\r\n')],{type:'application/x-research-info-systems'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='digest_'+document.body.dataset.date+'_selected.ris';a.click();
+  downloadFile(name,lines.join('\r\n'),'application/x-research-info-systems');
 }
-function showMore(b){b.closest('section').classList.add('open')}
+function flash(m){const b=document.getElementById('flash');if(b){b.textContent=m;setTimeout(()=>b.textContent='',2500)}}
 function setThemeLabel(){const b=document.getElementById("themebtn");if(b)b.textContent=document.documentElement.dataset.theme==="dark"?"Light mode":"Dark mode"}
 function toggleTheme(){const d=document.documentElement;const dark=d.dataset.theme!=="dark";if(dark)d.dataset.theme="dark";else delete d.dataset.theme;try{localStorage.setItem("plantdigest-theme",dark?"dark":"light")}catch(e){}setThemeLabel()}
 setThemeLabel();
-function clearAll(){if(confirm('Untick everything?')){kept={};save();location.reload()}}
-function flash(m){const b=document.getElementById('flash');b.textContent=m;setTimeout(()=>b.textContent='',2500)}
+
+const DATE=document.body.dataset.date;
+let saved=loadSaved();
+function recOf(el){const r=JSON.parse(el.dataset.rec);const p=el.querySelector('details p');r.abstract=p?p.textContent:'';r.review=el.dataset.rev==='1';return r}
+// one-time move of ticks made before the Saved page existed
+try{const old=JSON.parse(localStorage.getItem('plantdigest-'+DATE)||'null');
+  if(old){document.querySelectorAll('.item').forEach(el=>{if(old[el.dataset.id]&&!saved[el.dataset.id]){saved[el.dataset.id]=Object.assign(recOf(el),{savedOn:DATE,digest:DATE})}});
+    storeSaved(saved);localStorage.removeItem('plantdigest-'+DATE)}}catch(e){}
+function refreshCount(){
+  const here=[...document.querySelectorAll('.item')].filter(el=>saved[el.dataset.id]).length;
+  document.getElementById('nkept').textContent=here;
+  const t=document.getElementById('ntotal');if(t)t.textContent=Object.keys(saved).length;
+}
+document.querySelectorAll('.item').forEach(el=>{
+  const cb=el.querySelector('input');const id=el.dataset.id;
+  if(saved[id]){cb.checked=true;el.classList.add('kept')}
+  cb.addEventListener('change',()=>{
+    saved=loadSaved();
+    if(cb.checked){saved[id]=Object.assign(recOf(el),{savedOn:new Date().toISOString().slice(0,10),digest:DATE});el.classList.add('kept')}
+    else{delete saved[id];el.classList.remove('kept')}
+    storeSaved(saved);refreshCount();applyFilter();
+  });
+});
+refreshCount();
+function keepItem(el,show){
+  const pre=el.dataset.pre==='1',rev=el.dataset.rev==='1';
+  switch(show){
+    case 'saved':return !!saved[el.dataset.id];
+    case 'research':return !pre&&!rev;
+    case 'reviews':return rev;
+    case 'preprints':return pre;
+    case 'nopre':return !pre;
+    default:return true;
+  }
+}
+function applyFilter(){
+  const q=document.getElementById('q').value.toLowerCase().trim();
+  const show=document.getElementById('show').value;
+  document.querySelectorAll('section').forEach(sec=>{
+    if(q||show!=='all')sec.classList.add('open');
+    let n=0;
+    sec.querySelectorAll('.item').forEach(el=>{
+      const ok=(!q||el.textContent.toLowerCase().includes(q))&&keepItem(el,show);
+      el.classList.toggle('hide',!ok); if(ok)n++;
+    });
+    sec.classList.toggle('hide',n===0);
+  });
+}
+['q','show'].forEach(id=>document.getElementById(id).addEventListener('input',applyFilter));
+function savedHere(){return [...document.querySelectorAll('.item')].filter(el=>saved[el.dataset.id]).map(recOf)}
+function copyList(){copyRefs(savedHere())}
+function ris(){risFor(savedHere(),'digest_'+DATE+'_saved.ris')}
+function showMore(b){b.closest('section').classList.add('open')}
 </script>
 
 </body></html>
