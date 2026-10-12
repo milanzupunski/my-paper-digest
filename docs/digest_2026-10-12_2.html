@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plant paper digest 2026-10-12</title>
+<style>
+:root{--bg:#fbfaf7;--card:#fff;--ink:#1f2421;--mute:#68716b;--line:#e3e1da;
+--acc:#2f6b4f;--acc2:#e7f0ea;--pre:#8a5a00;--pre2:#fbf1dc;--sel:#fff7d6}
+:root[data-theme=dark]{--bg:#141716;--card:#1c201e;--ink:#e6e8e4;
+--mute:#9aa39d;--line:#2d3330;--acc:#7cc2a0;--acc2:#20302a;--pre:#e0b25c;--pre2:#33291a;--sel:#3a3520}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px}
+.wrap{max-width:980px;margin:0 auto}
+h1{font-size:20px;margin:0 0 4px}
+.meta{color:var(--mute);font-size:13px}
+.meta a{color:var(--acc)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
+input[type=search]{flex:1;min-width:180px;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink)}
+button{padding:7px 11px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer;font-size:13px}
+button.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
+label.chk{font-size:13px;color:var(--mute);display:flex;gap:4px;align-items:center}
+nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+nav a{font-size:12px;text-decoration:none;color:var(--acc);background:var(--acc2);padding:2px 8px;border-radius:10px}
+main{padding:8px 16px 60px}
+h2{font-size:16px;margin:26px 0 8px;padding-bottom:4px;border-bottom:2px solid var(--acc)}
+h2 small{color:var(--mute);font-weight:normal}
+.item{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0;display:flex;gap:10px}
+.item.kept{background:var(--sel)}
+.item input{margin-top:5px;width:17px;height:17px;flex:none}
+.body{flex:1;min-width:0}
+.t{font-weight:600;color:var(--ink);text-decoration:none}
+.t:hover{text-decoration:underline}
+.au{color:var(--mute);font-size:13px}
+.src{font-size:13px;margin-top:2px}
+.badge{display:inline-block;font-size:11px;padding:0 6px;border-radius:8px;background:var(--acc2);color:var(--acc);margin-right:4px}
+.badge.rev{background:var(--line);color:var(--mute)}
+.badge.pre{background:var(--pre2);color:var(--pre)}
+.terms{font-size:12px;color:var(--mute);margin-top:3px}
+details{margin-top:4px;font-size:14px}
+summary{cursor:pointer;color:var(--acc);font-size:13px}
+.score{float:right;font-size:12px;color:var(--mute)}
+.notes{font-size:12px;color:var(--mute);margin-top:6px}
+.hide{display:none}
+.item.more{display:none}
+section.open .item.more{display:flex}
+section.open .item.more.hide{display:none}
+section.open .morebtn{display:none}
+.morebtn{margin:4px 0 0}
+select{padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font-size:13px}
+.btnlike{padding:7px 11px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer;font-size:13px}
+.rm{margin-top:6px;font-size:12px;padding:3px 8px}
+.src a,.meta a{color:var(--acc)}
+</style>
+<script>try{if(localStorage.getItem("plantdigest-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+</head>
+
+<body data-date="2026-10-12">
+<header><div class="wrap"><h1>Plant paper digest</h1>
+<div class="meta">6 papers, window 2026-10-04 to 2026-10-12, generated 2026-10-12 · <a href="archive.html">earlier digests</a></div>
+<div class="meta"><a href="saved.html">Saved papers (<span id="ntotal">0</span>)</a></div>
+<div class="bar"><input id="q" type="search" placeholder="Filter by any word…"><label class="chk">Show <select id="show"><option value="all">all papers</option><option value="saved">saved</option><option value="research">research papers only</option><option value="reviews">reviews only</option><option value="preprints">preprints only</option><option value="nopre">no preprints</option></select></label><button class="primary" onclick="copyList()">Copy saved here (<span id="nkept">0</span>)</button><button onclick="ris()">Download as RIS (Zotero)</button><button id="themebtn" onclick="toggleTheme()">Dark mode</button><span id="flash" class="meta"></span></div>
+<nav>
+<a href="#s0">Ca2+, ROS and early signaling (2)</a>
+<a href="#s1">Plant-microbe interactions and immunity (2)</a>
+<a href="#s2">Growth, development and organs (2)</a>
+</nav></div></header><main><div class='wrap'>
+<section id="s0"><h2>Ca2+, ROS and early signaling <small>2</small></h2>
+<div class="item" data-id="10.21203/rs.3.rs-11104275/v1" data-pre="1" data-rev="0" data-rec="{&quot;title&quot;: &quot;Dissecting Seedling-Stage Salinity Tolerance in Rice via QTL-seq: A Multi-Gene Network on Chromosome 7 and InDel Markers for Breeding&quot;, &quot;authors&quot;: &quot;Hosseini SM, Razavi K, Moradi F, Malboobi MA, Zoshki SA, Subudhi PK, Shobbar Z.&quot;, &quot;journal&quot;: &quot;Research Square&quot;, &quot;date&quot;: &quot;2026-10-09&quot;, &quot;doi&quot;: &quot;10.21203/rs.3.rs-11104275/v1&quot;, &quot;link&quot;: &quot;https://doi.org/10.21203/rs.3.rs-11104275/v1&quot;, &quot;preprint&quot;: true, &quot;review&quot;: false}">
+<input type="checkbox" title="Keep"><div class="body">
+<span class="score">8.0</span>
+<a class="t" href="https://doi.org/10.21203/rs.3.rs-11104275/v1" target="_blank" rel="noopener">Dissecting Seedling-Stage Salinity Tolerance in Rice via QTL-seq: A Multi-Gene Network on Chromosome 7 and InDel Markers for Breeding</a>
+<div class="au">Hosseini SM, Razavi K, Moradi F … Shobbar Z.</div>
+<div class="src"><span class="badge pre">preprint</span><span class="badge">Plant-microbe interactions and immunity</span><span class="badge">Abiotic stress</span><span class="badge">Growth</span><i>Research Square</i> · 2026-10-09</div>
+<div class="terms">matched: ROS, reactive oxygen species, salt sens*, defense, salinity, seed*</div>
+<details><summary>abstract</summary><p>Abstract Background Soil salinity severely constrains global rice production and threatens high-quality but salt-sensitive local cultivars, including the Iranian landrace Tarom Mahali. To accelerate the introgression of salt tolerance traits, this study employed a QTL-seq approach using an F₂ population derived from a cross between Tarom Mahali and the salt-tolerant donor FL478 to identify genomic regions associated with seedling-stage salinity tolerance. Results Following rigorous phenotypic screening under 12 dS/m salinity stress and whole-genome sequencing of extreme phenotypic bulks, application of QTL-seq approach revealed 85 high-confidence quantitative trait loci (QTLs) distributed across 10 chromosomes. Notably, the salt tolerance alleles originated exclusively from FL478 but were physically distinct from the well-known Saltol locus. Instead, salinity tolerance was governed by a multi-layered genetic network, highlighted by a major cluster of 40 novel QTLs on chromosome 7. Functional annotation of 201 unique candidate genes revealed an integrated, Saltol -independent defense strategy involving transcriptional regulators (e.g. OsMADS26 ), structural reinforcement ( CESA6 ), an F-box gene hotspot associated with post-translational quality control, and a novel chromosome 7 metal cation transporter potentially involved in maintaining ion homeostasis. To translate these genomic discoveries into practical breeding applications, 15 high-confidence, codominant insertion/deletion (InDel) markers (≥ 14 bp) were developed and empirically validated. Conclusions These findings suggest a coordinated salt‑adaptive network centered on transcriptional reprogramming, post-translational regulation, ion homeostasis, and reactive oxygen species (ROS) scavenging a network, which may collectively contribute to the enhanced tolerance of FL478. Furthermore, the 15 validated InDel markers can discriminate between tolerant and sensitive parental lines, providing a practical and cost-effective toolkit for marker-assisted selection aimed at enhancing salt resilience in elite rice varieties.</p></details>
+</div></div>
+<div class="item" data-id="10.21203/rs.3.rs-11132755/v1" data-pre="1" data-rev="0" data-rec="{&quot;title&quot;: &quot;Superoxide radical accumulation in bell pepper roots infected with Meloidogyne enterolobii&quot;, &quot;authors&quot;: &quot;Staling CA, Broetto F, Cardoso IA, Zanuncio CJ, Castro BM, Wilcken SRS.&quot;, &quot;journal&quot;: &quot;Research Square&quot;, &quot;date&quot;: &quot;2026-10-08&quot;, &quot;doi&quot;: &quot;10.21203/rs.3.rs-11132755/v1&quot;, &quot;link&quot;: &quot;https://doi.org/10.21203/rs.3.rs-11132755/v1&quot;, &quot;preprint&quot;: true, &quot;review&quot;: false}">
+<input type="checkbox" title="Keep"><div class="body">
+<span class="score">7.0</span>
+<a class="t" href="https://doi.org/10.21203/rs.3.rs-11132755/v1" target="_blank" rel="noopener">Superoxide radical accumulation in bell pepper roots infected with Meloidogyne enterolobii</a>
+<div class="au">Staling CA, Broetto F, Cardoso IA … Wilcken SRS.</div>
+<div class="src"><span class="badge pre">preprint</span><span class="badge">Plant-microbe interactions and immunity</span><span class="badge">Growth</span><i>Research Square</i> · 2026-10-08</div>
+<div class="terms">matched: ROS, reactive oxygen species, pathogen*, defense, root, roots</div>
+<details><summary>abstract</summary><p>Abstract Plants activate defense mechanisms with reactive oxygen species (ROS) and antioxidant enzymes in response to pathogen infection. The objective was to adapt the infiltration protocol, to detect ROS, using the dye nitrobluetetrazolium (NBT) in root tissues of bell pepper plants. The susceptibility of this genotype was determined in an incubator and the in situ localization protocol of ROS adapted by decreasing the NBT infiltration period without vacuum and addition of incubation time without light. Gall indices, egg masses, reproduction factor and tests to locate ROS were obtained 60 days after nematode inoculation. Meloidogyne enterolobii reproduced in the susceptible genotype cv. ‘Beth-R’. The protocol adaptation allowed to efficiently determine the process and extension of the M. enterolobii infection based in the increase of the gall area and formation of free radicals.</p></details>
+</div></div>
+</section>
+<section id="s1"><h2>Plant-microbe interactions and immunity <small>2</small></h2>
+<div class="item" data-id="10.21203/rs.3.rs-11133441/v1" data-pre="1" data-rev="0" data-rec="{&quot;title&quot;: &quot;Lectin gene families in Medicago truncatula: genome-wide identification, in silico characterization, and expression under rhizobial symbiosis and drought stress&quot;, &quot;authors&quot;: &quot;Manjengwa B.&quot;, &quot;journal&quot;: &quot;Research Square&quot;, &quot;date&quot;: &quot;2026-10-08&quot;, &quot;doi&quot;: &quot;10.21203/rs.3.rs-11133441/v1&quot;, &quot;link&quot;: &quot;https://doi.org/10.21203/rs.3.rs-11133441/v1&quot;, &quot;preprint&quot;: true, &quot;review&quot;: false}">
+<input type="checkbox" title="Keep"><div class="body">
+<span class="score">17.0</span>
+<a class="t" href="https://doi.org/10.21203/rs.3.rs-11133441/v1" target="_blank" rel="noopener">Lectin gene families in Medicago truncatula: genome-wide identification, in silico characterization, and expression under rhizobial symbiosis and drought stress</a>
+<div class="au">Manjengwa B.</div>
+<div class="src"><span class="badge pre">preprint</span><span class="badge">Kinases and signal transduction</span><span class="badge">Hormones</span><span class="badge">Abiotic stress</span><i>Research Square</i> · 2026-10-08</div>
+<div class="terms">matched: kinase*, receptor-like kinase*, RLK*, receptor*, abscisic acid, ethylene, pathogen*, rhizobi*, mycorrhiz*, symbio*, drought, stress respon*</div>
+<details><summary>abstract</summary><p>Abstract Background Lectins have established roles in plant development, host-pathogen interactions, and stress responses. Medicago truncatula (Mt) is a model plant used to study legume biology, including rhizobial and mycorrhizal endosymbioses and stress responses, yet no genome-wide identification of lectin gene families has been reported. The recent NCBI RefSeq annotation of the Mt genome provides a non-redundant gene set suited to this analysis. Results A total of 302 lectin genes were identified across 8 of the 12 established plant lectin families, with GNA the most abundant family followed by the Legume. Lectin genes were unevenly distributed across the chromosomes, and their expansion was primarily driven by tandem duplication events. Chimerolectins containing non-lectin domains accounted for 77.8% of the dataset, most of which were lectin receptor-like kinases, suggesting diverse functions beyond carbohydrate binding. Synteny analysis recovered more collinear gene pairs with Glycine max than with Arabidopsis thaliana . Potential carbohydrate recognition sites were conserved in most families with the exception of the GNA family, which also showed poor predicted glycan specificity. Reanalysis of public RNA-seq data showed that lectin genes responding to rhizobial inoculation were predominantly upregulated in wild-type roots and downregulated in the nsp2 mutant, and were over-represented in both genotypes and among genes whose response depended on NSP2. Separately, moderate and severe water deficit altered the expression of 64.6% of lectin genes (in leaves, taproots and fibrous roots), which were over-represented among downregulated genes and increased in number with drought severity. Chr4g0065561 (CRA-RLK) was upregulated in all three tissues under both moderate and severe water deficit, making it a candidate for functional validation. Rgulatory analysis found abundant abscisic acid-responsive elements and ethylene responsive factor binding sites, which are linked with rhizobial symbiosis. Conclusion These data provide a detailed understanding of the structural diversity, expansion and functional insights of lectin genes in Mt and of their transcriptional responses to rhizobial symbiosis and water deficit.</p></details>
+</div></div>
+<div class="item" data-id="10.21203/rs.3.rs-10715147/v1" data-pre="1" data-rev="0" data-rec="{&quot;title&quot;: &quot;Growth-year-dependent multi-omics remodeling of triterpenoid saponin accumulation and rhizosphere microbiota in Clematis florida var. Plena&quot;, &quot;authors&quot;: &quot;Zhang H, Lin A, Chen L, Zhuang X, Zhong Y, Cai M, Wang G, Wang X.&quot;, &quot;journal&quot;: &quot;Research Square&quot;, &quot;date&quot;: &quot;2026-10-09&quot;, &quot;doi&quot;: &quot;10.21203/rs.3.rs-10715147/v1&quot;, &quot;link&quot;: &quot;https://doi.org/10.21203/rs.3.rs-10715147/v1&quot;, &quot;preprint&quot;: true, &quot;review&quot;: false}">
+<input type="checkbox" title="Keep"><div class="body">
+<span class="score">7.0</span>
+<a class="t" href="https://doi.org/10.21203/rs.3.rs-10715147/v1" target="_blank" rel="noopener">Growth-year-dependent multi-omics remodeling of triterpenoid saponin accumulation and rhizosphere microbiota in Clematis florida var. Plena</a>
+<div class="au">Zhang H, Lin A, Chen L … Wang X.</div>
+<div class="src"><span class="badge pre">preprint</span><span class="badge">Kinases and signal transduction</span><span class="badge">Hormones</span><span class="badge">Abiotic stress</span><i>Research Square</i> · 2026-10-09</div>
+<div class="terms">matched: signaling, hormone*, microbiome*, microbiota, stress respon*, root, roots, growth, development</div>
+<details><summary>abstract</summary><p>Abstract Clematis florida var. plena , known as Shiershichen in She ethnopharmacy, is an important medicinal plant in Fujian Province, China, yet the biological basis of its growth-year-dependent quality formation remains unclear. Here, we integrated root metabolomics, transcriptomics, and rhizosphere microbiome profiling to compare one-year-old and three-year-old cultivated plants. HPLC analysis showed that three-year-old roots accumulated significantly higher levels of total saponins and oleanolic acid, whereas total flavonoids showed no significant difference. Untargeted LC-MS/MS detected 7,477 metabolites, including 102 pentacyclic triterpenoids and 21 oleanolic-acid-skeleton compounds, with most differentially accumulated triterpenoids and terpenoid glycosides enriched in three-year-old plants. Transcriptome assembly generated 36,981 unigenes and identified 4,043 differentially expressed genes between growth years, with enrichment in terpenoid backbone, flavonoid, phenylpropanoid, monoterpenoid, and diterpenoid biosynthesis. Growth-year-associated differences in CYP450, UGT, and hormone-signaling genes provide transcriptomic evidence that triterpenoid scaffold modification, glycosylation, and stress-responsive signaling are candidate processes associated with chemical maturation. Rhizosphere bacterial communities were also reshaped with plant age, and multi-omics networks linked selected microbial taxa with saponin-associated metabolites and gene modules. Together, these findings establish a plant gene expression-bioactive metabolite-rhizosphere microbiome association framework for C. florida var. plena and provide evidence for harvest-year selection, cultivation optimization, and quality-marker development.</p></details>
+</div></div>
+</section>
+<section id="s2"><h2>Growth, development and organs <small>2</small></h2>
+<div class="item" data-id="10.20944/preprints202610.0166.v1" data-pre="1" data-rev="0" data-rec="{&quot;title&quot;: &quot;α Carbonic Anhydrase 1 Affects Photosynthetic CO2 Assimilation and Stomatal Conductance in Arabidopsis thaliana Plants&quot;, &quot;authors&quot;: &quot;Rudenko NN, Ruppert MY, Mitenko GV, Nadeeva EM, Kozuleva MA, Ignatova LK, Ivanov BN.&quot;, &quot;journal&quot;: &quot;Preprints.org&quot;, &quot;date&quot;: &quot;2026-10-04&quot;, &quot;doi&quot;: &quot;10.20944/preprints202610.0166.v1&quot;, &quot;link&quot;: &quot;https://doi.org/10.20944/preprints202610.0166.v1&quot;, &quot;preprint&quot;: true, &quot;review&quot;: false}">
+<input type="checkbox" title="Keep"><div class="body">
+<span class="score">8.5</span>
+<a class="t" href="https://doi.org/10.20944/preprints202610.0166.v1" target="_blank" rel="noopener">α Carbonic Anhydrase 1 Affects Photosynthetic CO2 Assimilation and Stomatal Conductance in Arabidopsis thaliana Plants</a>
+<div class="au">Rudenko NN, Ruppert MY, Mitenko GV … Ivanov BN.</div>
+<div class="src"><span class="badge pre">preprint</span><span class="badge">Ca2+</span><span class="badge">Kinases and signal transduction</span><span class="badge">Cell biology and organelles</span><i>Preprints.org</i> · 2026-10-04</div>
+<div class="terms">matched: hydrogen peroxide, signaling, chloroplast*, peroxisom*, leaf, leaves, stoma*, development</div>
+<details><summary>abstract</summary><p>Arabidopsis thaliana plants of two mutant lines with knocked out the At3g52720 gene, encoding stromal α-carbonic anhydrase 1, αCA1 (αCA1-KO), and wild-type plants, of the Columbia ecotype (Col), were grown under 450 ppm (NCO2) and 150 ppm (LCO2) CO2 in the air. The CO2 assimilation rate (ACO2) in plants grown under NCO2 was lower in the αCA1-KO plants than in Col plants at CO2 concentrations from 600 to 1200 ppm in the measurement chamber. In LCO2-grown plants, ACO2 values were lower than in NCO2-grown plants both in Col and mutants, with the same values in mutants and Col. Water use efficiency (WUE) in NCO2 grown mutant plants was lower than in Col at a CO2 concentration of 600 ppm and above, and in LCO2-grown mutants WUE became lower than in Col at 1200 ppm. The starch content was lower in leaves of mutants than in Col under both NCO2 and LCO2 conditions due to its reduced synthesis during the daytime photosynthesis. Under NCO2, the content of hydrogen peroxide was twice higher in αCA1‑KO plant leaves than in Col. Under LCO2, the content of Н2О2 in Col increased to more than three times its level under NCO2, and became 2.5 times higher than in αCA1‑KO, in which it decreased by 1.5 times compared to that in NCO2 plants. Under NCO2 conditions, the contents of the stromal, cytoplasmic and peroxisomal forms of ascorbate peroxidases (APXs) were about twice higher in αCA1-KO than in Col plants. Contrariwise, in LCO2-grown plants the contents of APXs were lower in mutants than in Col. The total protein amount, as well as the level of ribulose-1,5-bisphosphate carboxylase/oxygenase, were the same in Col and mutants under NCO2 conditions, but were 35% and 45-50%, respectively, lower in αCA1-KO than in Col under LCO2 conditions. In the leaves of NCO2-grown plants, the stomatal conductance was higher in αCA1-KO than in Col with slower stomatal opening and delayed closure in response to decreases and increases in CO2 level, respectively. At the same time, in the absence of αCA1, both the total number of stomata per unit leaf surface area, and the relative number of open stomata were higher than in Col leaves. In the protoplasts isolated from NCO2-grown αCA1-KO plants, the steady-state rates of oxygen evolution were 30 % lower in mutants than in Col and were reached at a lower HCO3¯ concentration (5 mM) than in protoplasts from Col (8 mM). The apparent half-saturating bicarbonate concentration was approximately 2 mM for αCA1-KO and 3 mM for Col. Our data demonstrate the involvement of the stromal chloroplast αCA1 in providing A. thaliana cells with CO2, the importance of this enzyme for starch synthesis, as well as the significance of αCA1 for protein synthesis in plants. The increase in the total number of stomata per unit of leaf surface area and in the relative proportion of open stomata, as well as the reduced rate of stomatal responses in plants lacking αCA1, suggests the possible involvement of this enzyme in signaling processes regulating both stomatal movement and development.</p></details>
+</div></div>
+<div class="item" data-id="10.21203/rs.3.rs-10948482/v1" data-pre="1" data-rev="0" data-rec="{&quot;title&quot;: &quot;FveMYB117a and SL1 cooperatively regulate leaf morphogenesis in woodland strawberry&quot;, &quot;authors&quot;: &quot;Han Y, Feng J, Lu P, Li L, Yang M, Yang L, Kang C.&quot;, &quot;journal&quot;: &quot;Research Square&quot;, &quot;date&quot;: &quot;2026-10-09&quot;, &quot;doi&quot;: &quot;10.21203/rs.3.rs-10948482/v1&quot;, &quot;link&quot;: &quot;https://doi.org/10.21203/rs.3.rs-10948482/v1&quot;, &quot;preprint&quot;: true, &quot;review&quot;: false}">
+<input type="checkbox" title="Keep"><div class="body">
+<span class="score">6.5</span>
+<a class="t" href="https://doi.org/10.21203/rs.3.rs-10948482/v1" target="_blank" rel="noopener">FveMYB117a and SL1 cooperatively regulate leaf morphogenesis in woodland strawberry</a>
+<div class="au">Han Y, Feng J, Lu P … Kang C.</div>
+<div class="src"><span class="badge pre">preprint</span><span class="badge">Hormones</span><i>Research Square</i> · 2026-10-09</div>
+<div class="terms">matched: auxin*, cytokinin*, leaf, leaves, growth, development, morphogen*</div>
+<details><summary>abstract</summary><p>Abstract Background Leaves function as the primary photosynthetic organs that produce energy for plant growth and development. In strawberries ( Fragaria L.), mature leaves are trifoliate with serrated margins. Both FveMYB117a and SL1 ( SIMPLE LEAF1 ) play crucial roles in regulating strawberry leaf development. Nevertheless, the genetic relationship between these two genes and their underlying molecular regulatory mechanisms remain uncharacterized. Results The fvemyb117a mutant produces leaves with 1–5 leaflets, while the sl1 mutant predominantly forms single-leaflet leaves. The fvemyb117a sl1 double mutant produces only one small leaflet, with both the number of serrations and leaf area significantly reduced. Several lines of evidence demonstrate that FveMYB117a indirectly activates SL1 expression in leaves. Transcriptome analysis shows that a number of transcription factors and genes involved in the auxin and cytokinin pathways are downregulated in all three mutants. In young leaves, auxin levels are significantly lower in the mutants than the wild-type control; cytokinin levels are markedly elevated in fvemyb117a , but significantly reduced in both sl1 and the fvemyb117a sl1 double mutant. Conclusions These results indicate that SL1 is epistatic to FveMYB117a in leaflet initiation, whereas the two genes exert additive effects on leaf serration formation. Together, they constitute an interactive regulatory network that coordinately modulates leaf morphogenesis in woodland strawberry.</p></details>
+</div></div>
+</section>
+<div class="notes"><b>Run report</b><br>Window 2026-10-04 to 2026-10-12<br>Europe PMC (FIRST_IDATE): 759 hits<br>bioRxiv: 1874 records in window, 1383 kept as new preprints<br>Crossref: 786 articles from 32 journal ISSNs<br>Crossref journals with 0 papers this window: Quantitative Plant Biology (2632-8828)<br>After merging duplicates: 2697 unique papers<br>Older than 365 days: 24 | not plant papers: 1811 | below min_score 6.0: 784 | shown in an earlier digest: 72 | in this digest: 6</div>
+</div></main>
+
+<script>
+const SKEY='plantdigest-saved';
+function loadSaved(){try{return JSON.parse(localStorage.getItem(SKEY)||'{}')}catch(e){return {}}}
+function storeSaved(o){try{localStorage.setItem(SKEY,JSON.stringify(o));return true}catch(e){alert('Your browser blocked saving. Saved papers cannot be stored in this window (private mode?).');return false}}
+function refLine(r){return `${r.authors} (${(r.date||'').slice(0,4)}) ${r.title}. ${r.journal}. ${r.link}`}
+function copyRefs(list){
+  if(!list.length){alert('Nothing to copy yet.');return}
+  const txt=list.map(refLine).join('\n\n');
+  navigator.clipboard.writeText(txt).then(()=>flash('Copied '+list.length+' references'),()=>{prompt('Copy:',txt)});
+}
+function downloadFile(name,text,type){
+  const blob=new Blob([text],{type:type});const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();
+}
+function risFor(list,name){
+  if(!list.length){alert('Nothing to export yet.');return}
+  const lines=[];
+  list.forEach(r=>{
+    lines.push('TY  - '+(r.preprint?'UNPB':'JOUR'));
+    (r.authors||'').split(/,\s*/).filter(Boolean).forEach(a=>lines.push('AU  - '+a));
+    lines.push('TI  - '+r.title);lines.push('T2  - '+r.journal);
+    if(r.date)lines.push('PY  - '+r.date.slice(0,4));
+    if(r.doi)lines.push('DO  - '+r.doi);
+    lines.push('UR  - '+r.link);
+    if(r.abstract)lines.push('AB  - '+r.abstract);
+    lines.push('ER  - ','');
+  });
+  downloadFile(name,lines.join('\r\n'),'application/x-research-info-systems');
+}
+function flash(m){const b=document.getElementById('flash');if(b){b.textContent=m;setTimeout(()=>b.textContent='',2500)}}
+function setThemeLabel(){const b=document.getElementById("themebtn");if(b)b.textContent=document.documentElement.dataset.theme==="dark"?"Light mode":"Dark mode"}
+function toggleTheme(){const d=document.documentElement;const dark=d.dataset.theme!=="dark";if(dark)d.dataset.theme="dark";else delete d.dataset.theme;try{localStorage.setItem("plantdigest-theme",dark?"dark":"light")}catch(e){}setThemeLabel()}
+setThemeLabel();
+
+const DATE=document.body.dataset.date;
+let saved=loadSaved();
+function recOf(el){const r=JSON.parse(el.dataset.rec);const p=el.querySelector('details p');r.abstract=p?p.textContent:'';r.review=el.dataset.rev==='1';return r}
+// one-time move of ticks made before the Saved page existed
+try{const old=JSON.parse(localStorage.getItem('plantdigest-'+DATE)||'null');
+  if(old){document.querySelectorAll('.item').forEach(el=>{if(old[el.dataset.id]&&!saved[el.dataset.id]){saved[el.dataset.id]=Object.assign(recOf(el),{savedOn:DATE,digest:DATE})}});
+    storeSaved(saved);localStorage.removeItem('plantdigest-'+DATE)}}catch(e){}
+function refreshCount(){
+  const here=[...document.querySelectorAll('.item')].filter(el=>saved[el.dataset.id]).length;
+  document.getElementById('nkept').textContent=here;
+  const t=document.getElementById('ntotal');if(t)t.textContent=Object.keys(saved).length;
+}
+document.querySelectorAll('.item').forEach(el=>{
+  const cb=el.querySelector('input');const id=el.dataset.id;
+  if(saved[id]){cb.checked=true;el.classList.add('kept')}
+  cb.addEventListener('change',()=>{
+    saved=loadSaved();
+    if(cb.checked){saved[id]=Object.assign(recOf(el),{savedOn:new Date().toISOString().slice(0,10),digest:DATE});el.classList.add('kept')}
+    else{delete saved[id];el.classList.remove('kept')}
+    storeSaved(saved);refreshCount();applyFilter();
+  });
+});
+refreshCount();
+function keepItem(el,show){
+  const pre=el.dataset.pre==='1',rev=el.dataset.rev==='1';
+  switch(show){
+    case 'saved':return !!saved[el.dataset.id];
+    case 'research':return !pre&&!rev;
+    case 'reviews':return rev;
+    case 'preprints':return pre;
+    case 'nopre':return !pre;
+    default:return true;
+  }
+}
+function applyFilter(){
+  const q=document.getElementById('q').value.toLowerCase().trim();
+  const show=document.getElementById('show').value;
+  document.querySelectorAll('section').forEach(sec=>{
+    if(q||show!=='all')sec.classList.add('open');
+    let n=0;
+    sec.querySelectorAll('.item').forEach(el=>{
+      const ok=(!q||el.textContent.toLowerCase().includes(q))&&keepItem(el,show);
+      el.classList.toggle('hide',!ok); if(ok)n++;
+    });
+    sec.classList.toggle('hide',n===0);
+  });
+}
+['q','show'].forEach(id=>document.getElementById(id).addEventListener('input',applyFilter));
+function savedHere(){return [...document.querySelectorAll('.item')].filter(el=>saved[el.dataset.id]).map(recOf)}
+function copyList(){copyRefs(savedHere())}
+function ris(){risFor(savedHere(),'digest_'+DATE+'_saved.ris')}
+function showMore(b){b.closest('section').classList.add('open')}
+</script>
+
+</body></html>
