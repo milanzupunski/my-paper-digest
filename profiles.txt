@@ -65,7 +65,25 @@ Glycine max
 Brassica
 poplar
 Populus
+aspen
 willow
+Salix
+beech
+Fagus
+oak
+Quercus
+birch
+Betula
+pine
+Pinus
+spruce
+Picea
+conifer*
+black locust
+Robinia
+tree
+trees
+woody
 grapevine
 lettuce
 sugar beet
@@ -323,6 +341,51 @@ organogenesis | 1
 differentiation | 0.5
 
 
+[section: Trees and woody plants]
+poplar* | 1.5
+Populus | 1.5
+aspen | 1.5
+willow* | 1.5
+Salix | 1.5
+beech | 1.5
+Fagus | 1.5
+oak | 1.5
+oaks | 1.5
+Quercus | 1.5
+birch | 1.5
+Betula | 1.5
+pine | 1.5
+pines | 1.5
+Pinus | 1.5
+spruce | 1.5
+Picea | 1.5
+conifer* | 1.5
+black locust | 1.5
+Robinia | 1.5
+tree | 1
+trees | 1
+woody | 1.5
+forest tree* | 1.5
+tree physiology | 2
+wood formation | 2
+xylogenesis | 2
+secondary growth | 2
+tension wood | 2
+cambium | 1.5
+cambial | 1.5
+xylem | 1
+lignin* | 1
+hydraulic* | 1.5
+embolism | 2
+sap flow | 1.5
+dendro* | 1
+phenolog* | 1
+ectomycorrhiz* | 1.5
+phytoremediation | 1.5
+phytoextraction | 1.5
+drought | 0.5
+
+
 [section: Methods: imaging, biosensors, microfluidics]
 microfluidic* | 3
 lab-on-a-chip | 3
@@ -400,7 +463,6 @@ phylogen* | 2
 chloroplast genome* | 4
 plastome* | 4
 species distribution | 3
-forest* | 2
 soil | 1
 fertiliz* | 2
 fertilis* | 2
@@ -421,10 +483,9 @@ Potato research | 4
 Agronomy | 4
 crop science | 4
 Genetic resources and crop evolution | 5
-Journal of Ecology | 4
-Functional Ecology | 4
-Global Change Biology | 4
-New forests | 5
+Journal of Ecology | 1
+Functional Ecology | 1
+Global Change Biology | 1
 science of food | 5
 Food | 4
 Horticultur | 2
@@ -439,6 +500,9 @@ Weed | 3
 # "plant" = every paper counts as a plant paper; "any" = must pass [gate].
 # The digest header lists any journal that returned 0 papers: if one stays
 # at 0 for several weeks, its ISSN is probably wrong.
+0829-318X | Tree Physiology | plant
+1758-4469 | Tree Physiology | plant
+0931-1890 | Trees | plant
 1040-4651 | The Plant Cell | plant
 1532-298X | The Plant Cell | plant
 0032-0889 | Plant Physiology | plant
