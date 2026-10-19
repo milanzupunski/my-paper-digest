@@ -500,7 +500,6 @@ Weed | 3
 # "plant" = every paper counts as a plant paper; "any" = must pass [gate].
 # The digest header lists any journal that returned 0 papers: if one stays
 # at 0 for several weeks, its ISSN is probably wrong.
-0829-318X | Tree Physiology | plant
 1758-4469 | Tree Physiology | plant
 0931-1890 | Trees | plant
 1040-4651 | The Plant Cell | plant
