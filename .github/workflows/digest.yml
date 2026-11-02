@@ -2,12 +2,13 @@ name: Weekly digest
 
 on:
   schedule:
-    # Every Monday, tried several times (03:17, 05:17, 07:17, 09:17 and 11:17 UTC).
-    # GitHub sometimes starts scheduled runs hours late or skips them; the first
-    # run that gets through builds the digest, later runs only add new papers to
-    # it (or change nothing). Edit to taste:
+    # GitHub often starts scheduled runs late or skips them, so the digest is
+    # tried every hour on Monday, and every 4 hours on Tuesday as a fallback.
+    # As soon as one run gets through, the rest see that this week's digest
+    # exists and stop after a few seconds. Times are UTC.
     # minute hour day-of-month month day-of-week
-    - cron: "17 3,5,7,9,11 * * 1"
+    - cron: "17 * * * 1"
+    - cron: "17 */4 * * 2"
   workflow_dispatch:
     inputs:
       days:
@@ -37,14 +38,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Skip if this week's digest already exists
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ -f docs/runs.json ]; then
+            last=$(python3 -c "import json; print(json.load(open('docs/runs.json'))[0]['date'])" 2>/dev/null || echo 2000-01-01)
+            age=$(( ( $(date -u +%s) - $(date -u -d "$last" +%s) ) / 86400 ))
+            if [ "$age" -lt 6 ]; then
+              echo "This week's digest ($last) already exists; nothing to do."
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
       - uses: actions/setup-python@v5
+        if: steps.check.outputs.skip != 'true'
         with:
           python-version: "3.12"
 
       - name: Install requests
+        if: steps.check.outputs.skip != 'true'
         run: pip install requests
 
       - name: Build the digest
+        if: steps.check.outputs.skip != 'true'
         env:
           DAYS: ${{ github.event.inputs.days }}
         run: |
@@ -55,7 +71,7 @@ jobs:
           fi
 
       - name: Save the digest and the list of papers already shown
-        if: always()
+        if: always() && steps.check.outputs.skip != 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -72,8 +88,11 @@ jobs:
           fi
 
       - uses: actions/configure-pages@v5
+        if: steps.check.outputs.skip != 'true'
       - uses: actions/upload-pages-artifact@v3
+        if: steps.check.outputs.skip != 'true'
         with:
           path: docs
       - id: deploy
+        if: steps.check.outputs.skip != 'true'
         uses: actions/deploy-pages@v4
